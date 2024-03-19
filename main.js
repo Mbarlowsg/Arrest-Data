@@ -65,7 +65,7 @@ info.onAdd = function (map) {
 // should try to make this code prettier - maybe use anon function to pull in the boroStats rather than making individual function calls
 info.update = function (props) {
     this._div.innerHTML = '<h4>NYC Boroughs</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + "Total Arrests:" + boroStats(props).totalArrests + '<br />' + "Male Arrests:" + boroStats(props).maleArrests + '<br />' + "Female Arrests: " + boroStats(props).femaleArrests: 'Hover over a borough');
+        '<b>' + props.name + '</b><br />' + "Total Arrests:" + boroStats(props).totalArrests + '<br />' + "Male Arrests:" + boroStats(props).maleArrests + '<br />' + "Female Arrests: " + boroStats(props).femaleArrests + '<br />' + 'Most Common Crime:' + boroStats(props).mostCommonCrime: 'Hover over a borough');
 };
 
 info.addTo(map);
