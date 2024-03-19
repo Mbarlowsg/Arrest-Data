@@ -62,51 +62,67 @@ info.onAdd = function (map) {
 };
 
 // method that we will use to update the control based on feature properties passed
+// should try to make this code prettier - maybe use anon function to pull in the boroStats rather than making individual function calls
 info.update = function (props) {
     this._div.innerHTML = '<h4>NYC Boroughs</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + "Total Arrests:" + boroTotalArrests(props) : 'Hover over a borough');
+        '<b>' + props.name + '</b><br />' + "Total Arrests:" + boroStats(props).totalArrests + '<br />' + "Male Arrests:" + boroStats(props).maleArrests + '<br />' + "Female Arrests: " + boroStats(props).femaleArrests: 'Hover over a borough');
 };
 
 info.addTo(map);
 
-
+// Unused - delete when no longer needed for reference
 function boroTotalArrests(boro) {
-    let count = 0
     switch (boro.name){
         case 'Staten Island':
-            for (let arrest in arrestData.features){
-                if (arrestData.features[arrest].properties.arrest_boro === "S") {
-                    count++
-                }
-            }
-            return count
+            return arrestStats.general_stats.arrest_boro.S
         case 'Queens':
-            for (let arrest in arrestData.features){
-                if (arrestData.features[arrest].properties.arrest_boro === "Q") {
-                    count++
-                }
-            }
-            return count
+            return arrestStats.general_stats.arrest_boro.Q
         case 'Brooklyn':
-            for (let arrest in arrestData.features){
-                if (arrestData.features[arrest].properties.arrest_boro === "B") {
-                    count++
-                }
-            }
-            return count
+            return arrestStats.general_stats.arrest_boro.B 
         case 'Manhattan':
-            for (let arrest in arrestData.features){
-                if (arrestData.features[arrest].properties.arrest_boro === "M") {
-                    count++
-                }
-            }
-            return count
+            return arrestStats.general_stats.arrest_boro.M 
         case 'Bronx':
-            for (let arrest in arrestData.features){
-                if (arrestData.features[arrest].properties.arrest_boro === "K") {
-                    count++
-                }
+            return arrestStats.general_stats.arrest_boro.B 
+    }
+}
+
+// Returns an object containing the stats for each boro
+function boroStats(boro) {
+    switch (boro.name){
+        case 'Staten Island':
+            return {
+                totalArrests: arrestStats.general_stats.arrest_boro.S,
+                maleArrests: arrestStats.boro_stats.S.perp_sex.M,
+                femaleArrests: arrestStats.boro_stats.S.perp_sex.F,
+                mostCommonCrime: Object.keys(arrestStats.boro_stats.S.ofns_desc)[0]
             }
-            return count
+        case 'Queens':
+            return {
+                totalArrests: arrestStats.general_stats.arrest_boro.Q,
+                maleArrests: arrestStats.boro_stats.Q.perp_sex.M,
+                femaleArrests: arrestStats.boro_stats.Q.perp_sex.F,
+                mostCommonCrime: Object.keys(arrestStats.boro_stats.Q.ofns_desc)[0]
+            } 
+        case 'Brooklyn':
+            return {
+                totalArrests: arrestStats.general_stats.arrest_boro.B,
+                maleArrests: arrestStats.boro_stats.B.perp_sex.M,
+                femaleArrests: arrestStats.boro_stats.B.perp_sex.F,
+                mostCommonCrime: Object.keys(arrestStats.boro_stats.B.ofns_desc)[0]
+            }
+        case 'Manhattan':
+            return {
+                totalArrests: arrestStats.general_stats.arrest_boro.M,
+                maleArrests: arrestStats.boro_stats.M.perp_sex.M,
+                femaleArrests: arrestStats.boro_stats.M.perp_sex.F,
+                mostCommonCrime: Object.keys(arrestStats.boro_stats.M.ofns_desc)[0]
+            }
+        case 'Bronx':
+            return {
+                totalArrests: arrestStats.general_stats.arrest_boro.K,
+                maleArrests: arrestStats.boro_stats.K.perp_sex.M,
+                femaleArrests: arrestStats.boro_stats.K.perp_sex.F,
+                mostCommonCrime: Object.keys(arrestStats.boro_stats.K.ofns_desc)[0]
+            }
     }
 }
