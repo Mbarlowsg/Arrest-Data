@@ -17,4 +17,10 @@
 
 body {
     background-color: black;
+    padding: 0;
+    border: 0 auto;
+}
+
+h1{
+    height: 5vh;
 }
