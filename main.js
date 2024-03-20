@@ -87,6 +87,7 @@ function boroTotalArrests(boro) {
 }
 
 // Returns an object containing the stats for each boro
+// requires that the mostCommonCrime is at the first index of the ofns_desc prop
 function boroStats(boro) {
     switch (boro.name){
         case 'Staten Island':
