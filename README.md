@@ -10,6 +10,11 @@ Initially, I had just plotted out the different arrests throughout the city with
 ## What could be better / done in the future:
 - I would like to find where the jurisdiction for each precinct ends to be able to analyze the levels of policing around different precincts.
     - This would be able to tell us if specific precincts are over policing their areas and what crimes people get arrested for the most.
+- Data used for this visualization is only the first 1000 rows of the data. A more comprehensive visualization could be more effective for analysis.
 - Change the markers to reflect what crime was committed.
 - Different colours per borough (I tried this but it just looked ugly and too colourful)
 - More CSS styling on the borough info (I suck at CSS but should be able to manage some basic styling)
+
+## Data Sources:
+- [Arrest Data](https://data.cityofnewyork.us/Public-Safety/NYPD-Arrest-Data-Year-to-Date-/uip8-fykc/about_data)
+- [Borough Geometry Data](https://github.com/codeforgermany/click_that_hood/blob/main/public/data/new-york-city-boroughs.geojson)
